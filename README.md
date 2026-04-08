@@ -1,1 +1,0 @@
-# PreCommit DevSecOps

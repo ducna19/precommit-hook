@@ -1,0 +1,33 @@
+repos:
+  # Secret Scanning – Gitleaks
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.28.0
+    hooks:
+      - id: gitleaks
+
+  # SAST đa ngôn ngữ – Semgrep
+  - repo: local
+    hooks:
+      - id: semgrep
+        name: Semgrep SAST Scan
+        language: system
+        entry: semgrep scan --config=auto --error
+        pass_filenames: false
+
+  # SCA + Misconfiguration – Trivy
+  - repo: local
+    hooks:
+      - id: trivy-fs
+        name: Trivy FS Scan
+        language: system
+        entry: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+        pass_filenames: false
+
+  # SAST Mobile – MobSFScan
+  - repo: local
+    hooks:
+      - id: mobsfscan
+        name: MobSFScan
+        language: system
+        entry: mobsfscan
+        pass_filenames: false
